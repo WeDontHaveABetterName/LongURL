@@ -1,4 +1,5 @@
 database.mv.db
+database.trace.db
 
 HELP.md
 target/

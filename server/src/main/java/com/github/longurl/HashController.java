@@ -1,6 +1,7 @@
 package com.github.longurl;
 
 import org.apache.logging.log4j.message.Message;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,9 @@ import java.security.NoSuchAlgorithmException;
 
 @RestController
 public class HashController {
+
+    @Autowired
+    private EntryRepository entryRepository;
 
     private String hash(String string, MessageDigest digest) {
         byte[] hashed = digest.digest(
@@ -58,8 +62,12 @@ public class HashController {
         String hashedUrl = hash(body.url, digest);
 
         int timesToRepeat = body.length / hashedUrl.length();
+        String longUrl = hashedUrl.repeat(timesToRepeat);
 
-        CreateResponse response = new CreateResponse(hashedUrl.repeat(timesToRepeat));
+        Entry newEntry = new Entry(longUrl, body.url);
+        entryRepository.save(newEntry);
+
+        CreateResponse response = new CreateResponse(longUrl);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
