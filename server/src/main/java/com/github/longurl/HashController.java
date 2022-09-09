@@ -52,13 +52,14 @@ public class HashController {
     }
 
     @PostMapping("create")
-    public ResponseEntity<String> create(@RequestBody CreateRequest body) throws NoSuchAlgorithmException {
+    public ResponseEntity<CreateResponse> create(@RequestBody CreateRequest body) throws NoSuchAlgorithmException {
         MessageDigest digest = MessageDigest.getInstance(body.algorithm);
 
         String hashedUrl = hash(body.url, digest);
 
         int timesToRepeat = body.length / hashedUrl.length();
 
-        return new ResponseEntity<>(hashedUrl.repeat(Math.max(0, timesToRepeat)), HttpStatus.OK);
+        CreateResponse response = new CreateResponse(hashedUrl.repeat(timesToRepeat));
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
