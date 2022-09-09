@@ -101,7 +101,7 @@
             {#if result}
                 {#if result.success}
                     <h2 class="response">Your URL has been generated, click the box to copy it to the clipboard.</h2>
-                    <pre on:click={copy}>{window.location.href}{result.value}</pre>
+                    <pre on:click={copy}>{window.location.href}ggwp/{result.value}</pre>
                 {:else}
                     <h2>An error occurred: {result.value}</h2>
                 {/if}
