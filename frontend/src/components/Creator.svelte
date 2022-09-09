@@ -34,7 +34,7 @@
 
     const copy = () => {
         const clipboard = window.navigator.clipboard;
-        clipboard.writeText(result).then(() => {
+        clipboard.writeText(result.value).then(() => {
             alert("Copied to clipboard.");
         });
     };
