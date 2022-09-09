@@ -1,5 +1,7 @@
 package com.github.longurl;
 
+import com.github.longurl.exceptions.InvalidURLException;
+import org.apache.commons.validator.routines.UrlValidator;
 import org.apache.logging.log4j.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -57,6 +59,11 @@ public class HashController {
 
     @PostMapping("create")
     public ResponseEntity<CreateResponse> create(@RequestBody CreateRequest body) throws NoSuchAlgorithmException {
+        UrlValidator urlValidator = new UrlValidator();
+        if (!urlValidator.isValid(body.url)) {
+            throw new InvalidURLException(body.url + " is not a valid URL");
+        }
+
         MessageDigest digest = MessageDigest.getInstance(body.algorithm);
 
         String hashedUrl = hash(body.url, digest);
