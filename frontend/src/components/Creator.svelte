@@ -32,9 +32,13 @@
             });
     };
 
+    const makePath = () => {
+        return window.location.href + "ggwp/" + result.value;
+    }
+
     const copy = () => {
         const clipboard = window.navigator.clipboard;
-        clipboard.writeText(result.value).then(() => {
+        clipboard.writeText(makePath()).then(() => {
             alert("Copied to clipboard.");
         });
     };
@@ -101,7 +105,7 @@
             {#if result}
                 {#if result.success}
                     <h2 class="response">Your URL has been generated, click the box to copy it to the clipboard.</h2>
-                    <pre on:click={copy}>{window.location.href}ggwp/{result.value}</pre>
+                    <pre on:click={copy}>{makePath()}</pre>
                 {:else}
                     <h2>An error occurred: {result.value}</h2>
                 {/if}
