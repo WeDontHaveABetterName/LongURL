@@ -3,6 +3,7 @@ package com.github.longurl.controllers;
 import com.github.longurl.db.Entry;
 import com.github.longurl.db.EntryRepository;
 import com.github.longurl.exceptions.NoEntryFoundException;
+import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +16,7 @@ public class RedirectController {
     @Autowired
     private EntryRepository entryRepository;
 
-    @GetMapping("/{longUrl}")
+    @GetMapping("/ggwp/{longUrl}")
     public ModelAndView redirect(@PathVariable("longUrl") String longUrl) {
         Entry correspondingEntry = entryRepository.findEntryByLongUrl(longUrl);
         if (correspondingEntry == null) {
