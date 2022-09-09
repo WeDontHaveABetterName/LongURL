@@ -4,7 +4,9 @@ import com.github.longurl.db.Entry;
 import com.github.longurl.db.EntryRepository;
 import com.github.longurl.api.CreateRequest;
 import com.github.longurl.api.CreateResponse;
+import com.github.longurl.exceptions.InvalidRequestException;
 import com.github.longurl.exceptions.InvalidURLException;
+import com.github.longurl.exceptions.RequestedURLLengthInvalidException;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,8 +43,18 @@ public class HashController {
 
     @PostMapping("create")
     public ResponseEntity<CreateResponse> create(@RequestBody CreateRequest body) throws NoSuchAlgorithmException {
+        if (body.hasNulls()) {
+            throw new InvalidRequestException("The request must specify the algorithm, the url and the length");
+        }
+
+        if (body.length > 2000) {
+            throw new RequestedURLLengthInvalidException("Maximum length of a URL is 2000 characters");
+        } else if (body.length <= 0) {
+            throw new RequestedURLLengthInvalidException("The length of the generated URL should be positive");
+        }
+
         UrlValidator urlValidator = new UrlValidator();
-        if (!urlValidator.isValid(body.url)) {
+        if (body.url == null || !urlValidator.isValid(body.url)) {
             throw new InvalidURLException(body.url + " is not a valid URL");
         }
 
