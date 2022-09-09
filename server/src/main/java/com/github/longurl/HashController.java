@@ -37,26 +37,6 @@ public class HashController {
         return hexString.toString();
     }
 
-    private String hashEveryLetter(String message, MessageDigest digest) {
-        StringBuilder messageBuilder = new StringBuilder();
-        for (char l : message.toCharArray()) {
-            String letter = String.valueOf(l);
-            String hashedLetter = hash(letter, digest);
-            messageBuilder.append(hashedLetter);
-        }
-
-        return messageBuilder.toString();
-    }
-
-    private String hashEveryLetterRecursively(String message, MessageDigest digest, int depth) {
-        if (depth == 1) {
-            return message;
-        }
-
-        String allLettersHashed = hashEveryLetter(message, digest);
-        return hashEveryLetterRecursively(allLettersHashed, digest, depth - 1);
-    }
-
     @PostMapping("create")
     public ResponseEntity<CreateResponse> create(@RequestBody CreateRequest body) throws NoSuchAlgorithmException {
         UrlValidator urlValidator = new UrlValidator();
