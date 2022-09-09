@@ -11,10 +11,10 @@ public class Entry {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "longUrl", length = 2000)
+    @Column(name = "longUrl", length = 2000, unique = true)
     private String longUrl;
 
-    @Column(name = "url")
+    @Column(name = "url", length = 2000)
     private String url;
 
     public Entry() {}

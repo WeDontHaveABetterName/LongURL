@@ -64,8 +64,10 @@ public class HashController {
         int timesToRepeat = body.length / hashedUrl.length();
         String longUrl = hashedUrl.repeat(timesToRepeat);
 
-        Entry newEntry = new Entry(longUrl, body.url);
-        entryRepository.save(newEntry);
+        if (entryRepository.findEntryByLongUrl(longUrl) == null) {
+            Entry newEntry = new Entry(longUrl, body.url);
+            entryRepository.save(newEntry);
+        }
 
         CreateResponse response = new CreateResponse(longUrl);
         return new ResponseEntity<>(response, HttpStatus.OK);
