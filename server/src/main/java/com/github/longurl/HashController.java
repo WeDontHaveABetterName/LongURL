@@ -57,8 +57,8 @@ public class HashController {
 
         String hashedUrl = hash(body.url, digest);
 
-        String lengthenedUrl = hashEveryLetterRecursively(hashedUrl, digest, body.depth);
+        int timesToRepeat = body.length / hashedUrl.length();
 
-        return new ResponseEntity<>(lengthenedUrl, HttpStatus.OK);
+        return new ResponseEntity<>(hashedUrl.repeat(Math.max(0, timesToRepeat)), HttpStatus.OK);
     }
 }
