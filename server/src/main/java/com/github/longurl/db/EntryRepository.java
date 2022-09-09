@@ -1,4 +1,4 @@
-package com.github.longurl;
+package com.github.longurl.db;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

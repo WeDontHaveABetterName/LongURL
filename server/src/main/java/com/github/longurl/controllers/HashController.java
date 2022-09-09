@@ -1,12 +1,14 @@
-package com.github.longurl;
+package com.github.longurl.controllers;
 
+import com.github.longurl.db.Entry;
+import com.github.longurl.db.EntryRepository;
+import com.github.longurl.api.CreateRequest;
+import com.github.longurl.api.CreateResponse;
 import com.github.longurl.exceptions.InvalidURLException;
 import org.apache.commons.validator.routines.UrlValidator;
-import org.apache.logging.log4j.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;

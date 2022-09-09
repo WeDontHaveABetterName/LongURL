@@ -1,5 +1,7 @@
-package com.github.longurl;
+package com.github.longurl.controllers;
 
+import com.github.longurl.db.Entry;
+import com.github.longurl.db.EntryRepository;
 import com.github.longurl.exceptions.NoEntryFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

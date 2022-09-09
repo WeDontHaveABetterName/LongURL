@@ -1,4 +1,4 @@
-package com.github.longurl;
+package com.github.longurl.api;
 
 public class CreateRequest {
     public String algorithm;

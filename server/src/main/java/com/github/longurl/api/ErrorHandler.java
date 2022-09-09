@@ -1,4 +1,4 @@
-package com.github.longurl;
+package com.github.longurl.api;
 
 import com.github.longurl.exceptions.InvalidURLException;
 import com.github.longurl.exceptions.NoEntryFoundException;
